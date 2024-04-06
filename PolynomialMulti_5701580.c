@@ -39,14 +39,14 @@ void poly_multiply(int As, int Ae, int Bs, int Be, int* Cs, int* Ce) {
 			tempExpon = terms[i].expon + terms[j].expon;
 			int found = 0;
 			for (int k = *Cs; k < avail; k++) {
-				if (terms[k].expon == tempExpon) {
-					terms[k].coef += tempCoef;
+				if (terms[k].expon == tempExpon) { // 이미 같은 지수의 항이 있다면
+					terms[k].coef += tempCoef; // 계수를 그 항에 더해준다.
 					found = 1;
 					break;
 				}
 			}
-			if (!found) {
-				attach(tempCoef, tempExpon);
+			if (!found) { // 없다면
+				attach(tempCoef, tempExpon); // 새로운 항을 다항식에 추가한다.
 			}
 		}
 	}
