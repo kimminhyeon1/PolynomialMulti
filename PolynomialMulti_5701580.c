@@ -1,4 +1,5 @@
-﻿#include <stdio.h>
+﻿//두 다항식을 곱하는 프로그램
+#include <stdio.h>
 #include <stdlib.h>
 
 #define MAX_TERMS 101
