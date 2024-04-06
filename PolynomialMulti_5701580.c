@@ -7,11 +7,12 @@ struct term {
 	float coef;
 	int expon;
 }terms[MAX_TERMS] = {
-	{4.0, 3}, {3.0, 2}, {2.0, 1}, {1.0, 0},
-	{3.0, 2}, {2.0, 1}, {8.0, 0}
+	{7.0, 6}, {5.0, 3}, {9.0, 2}, {1.0, 0},
+	{5.0, 3}, {2.0, 2}, {1.0, 1}, {10.0, 0}
 };
-int avail = 7;
+int avail = 8;
 
+// 새로운 항을 다항식에 추가한다.
 void attach(float coef, int expon) {
 	if (avail >= MAX_TERMS) {
 		fprintf(stderr, "항의 개수가 너무 많음\n");
@@ -37,23 +38,23 @@ void poly_multiply(int As, int Ae, int Bs, int Be, int* Cs, int* Ce) {
 		for (j = Bs; j <= Be; j++) {
 			tempCoef = terms[i].coef * terms[j].coef;
 			tempExpon = terms[i].expon + terms[j].expon;
-			int found = 0;
+			int found = 0; 
 			for (int k = *Cs; k < avail; k++) {
-				if (terms[k].expon == tempExpon) {
-					terms[k].coef += tempCoef;
+				if (terms[k].expon == tempExpon) { // 이미 같은 지수의 항이 있다면
+					terms[k].coef += tempCoef; // 계수를 그 항에 더해준다.
 					found = 1;
 					break;
 				}
 			}
-			if (!found) {
-				attach(tempCoef, tempExpon);
+			if (!found) { // 없다면
+				attach(tempCoef, tempExpon); // 새로운 항을 다항식에 추가한다.
 			}
 		}
 	}
 	*Ce = avail - 1;
 }
 int main(int argc, char* argv[]) {
-	int As = 0, Ae = 3, Bs = 4, Be = 6, Cs, Ce;
+	int As = 0, Ae = 3, Bs = 4, Be = 7, Cs, Ce;
 
 	poly_multiply(As, Ae, Bs, Be, &Cs, &Ce);
 	print_poly(As, Ae);
